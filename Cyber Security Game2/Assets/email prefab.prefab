@@ -419,6 +419,7 @@ GameObject:
   - component: {fileID: 8796446176883340573}
   - component: {fileID: 5231592752645397824}
   - component: {fileID: 1014738619844648487}
+  - component: {fileID: 4214175339937907899}
   m_Layer: 5
   m_Name: email prefab
   m_TagString: Untagged
@@ -445,11 +446,11 @@ RectTransform:
   - {fileID: 596736913742128653}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000045776367, y: 95.483}
-  m_SizeDelta: {x: 0, y: -190.9664}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 2}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &5231592752645397824
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -488,6 +489,25 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4214175339937907899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6703012778034343662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 276c787950408a74d8a332b081d98f06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emailData:
+    sender: 
+    subject: 
+    message: 
+    isPhishing: 0
+  TrustButton: {fileID: 3733137754151341583}
+  ReportButton: {fileID: 2751345120431341372}
 --- !u!1 &6755976450378811373
 GameObject:
   m_ObjectHideFlags: 0
