@@ -419,7 +419,6 @@ GameObject:
   - component: {fileID: 8796446176883340573}
   - component: {fileID: 5231592752645397824}
   - component: {fileID: 1014738619844648487}
-  - component: {fileID: 4214175339937907899}
   m_Layer: 5
   m_Name: email prefab
   m_TagString: Untagged
@@ -489,25 +488,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4214175339937907899
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6703012778034343662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 276c787950408a74d8a332b081d98f06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  emailData:
-    sender: 
-    subject: 
-    message: 
-    isPhishing: 0
-  TrustButton: {fileID: 3733137754151341583}
-  ReportButton: {fileID: 2751345120431341372}
 --- !u!1 &6755976450378811373
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,7 +621,7 @@ GameObject:
   - component: {fileID: 3580535973078393857}
   - component: {fileID: 5918938835218356487}
   m_Layer: 5
-  m_Name: Sender
+  m_Name: SenderText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -898,7 +878,7 @@ GameObject:
   - component: {fileID: 9085972175558652308}
   - component: {fileID: 5708920919735015126}
   m_Layer: 5
-  m_Name: Subject
+  m_Name: SubjectText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
