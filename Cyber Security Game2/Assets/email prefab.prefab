@@ -419,6 +419,7 @@ GameObject:
   - component: {fileID: 8796446176883340573}
   - component: {fileID: 5231592752645397824}
   - component: {fileID: 1014738619844648487}
+  - component: {fileID: 1483232141789681649}
   m_Layer: 5
   m_Name: email prefab
   m_TagString: Untagged
@@ -488,6 +489,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1483232141789681649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6703012778034343662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68e6094dee7ebf2499976e4c3364db10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6755976450378811373
 GameObject:
   m_ObjectHideFlags: 0
