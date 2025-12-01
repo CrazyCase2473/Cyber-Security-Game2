@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class GameManager : MonoBehaviour
 
     // UI
     public GameObject questionPanel;
-    public Text questionText;
+    public TMPro.TMP_Text questionText;
     public Button[] answerButtons;
 
     int stepsUntilQuestion = 3;
@@ -69,7 +70,8 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < answerButtons.Length; i++)
         {
             int buttonIndex = i;
-            answerButtons[i].GetComponentInChildren<Text>().text = q.answers[i];
+            answerButtons[i].GetComponentInChildren<TMP_Text>().text = q.answers[i];
+
 
             answerButtons[i].onClick.RemoveAllListeners();
 
