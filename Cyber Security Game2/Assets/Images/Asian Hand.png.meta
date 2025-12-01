@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: cd26cd1da54fdd94ba59471b64cffaf5
+guid: a46e2d3b6c319d842a3524f8d92d0309
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8154608716579765840
-    second: ChatGPT Image Dec 1, 2025, 02_38_10 PM_0
+      213: -488990363791899075
+    second: Asian Hand_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ChatGPT Image Dec 1, 2025, 02_38_10 PM_0
+      name: Asian Hand_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1024
-        height: 1024
+        x: 211
+        y: 34
+        width: 271
+        height: 292
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0b185f5c39205de80800000000000000
-      internalID: -8154608716579765840
+      spriteID: d36489bdad1c639f0800000000000000
+      internalID: -488990363791899075
       vertices: []
       indices: 
       edges: []
