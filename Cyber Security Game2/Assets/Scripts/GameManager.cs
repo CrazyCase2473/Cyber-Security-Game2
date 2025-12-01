@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     // UI
     public GameObject questionPanel;
-    public Text questionText;
+    public TMPro.TMP_Text questionText;
     public Button[] answerButtons;
 
     int stepsUntilQuestion = 3;
