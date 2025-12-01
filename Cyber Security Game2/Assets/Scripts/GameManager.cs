@@ -1,93 +1,101 @@
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    [Header("Gameplay")]
     public GameObject bugPrefab;
     public Transform[] spawnPoints;
-    public float spawnInterval = 1f;
 
-    [Header("UI")]
-    public TMP_Text scoreText;
-    public GameObject questionPanel; 
-
-    [Header("Game State")]
     public int score = 0;
-    private bool gameOver = false;
+    public TMPro.TMP_Text scoreText;
+
+
+    public QuestionManager questionManager;
+
+    // UI
+    public GameObject questionPanel;
+    public Text questionText;
+    public Button[] answerButtons;
+
+    int stepsUntilQuestion = 3;
 
     void Awake()
     {
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
+        Instance = this;
     }
 
     void Start()
     {
-        UpdateScoreText();
-        InvokeRepeating("SpawnBug", 0f, spawnInterval);
+        UpdateScoreUI();
+        InvokeRepeating("SpawnBug", 0, 1.5f);
+        questionPanel.SetActive(false);
     }
 
-    // spawn but at spawn points
-    void SpawnBug()
+    public void AddScore(int amount)
     {
-        if (gameOver || spawnPoints.Length == 0) return;
+        score += amount;
+        UpdateScoreUI();
 
-        Transform spawn = spawnPoints[Random.Range(0, spawnPoints.Length)];
-        Instantiate(bugPrefab, spawn.position, Quaternion.identity);
-    }
-
-    // when bug gets killed
-    public void BugSquashed(Bug bug)
-    {
-        score++;
-        UpdateScoreText();
-
-        // chance to ask question
-        if(Random.value < 0.3f) // 30%
+        stepsUntilQuestion--;
+        if (stepsUntilQuestion <= 0)
+        {
+            stepsUntilQuestion = 3;
             ShowQuestion();
+        }
     }
 
-    
-    void UpdateScoreText()
+    void UpdateScoreUI()
     {
         scoreText.text = "Score: " + score;
     }
 
-    // show question and pause game
-    public void ShowQuestion()
+    void SpawnBug()
     {
-        if (questionPanel != null)
+        if (spawnPoints.Length == 0) return;
+        int r = Random.Range(0, spawnPoints.Length);
+        Instantiate(bugPrefab, spawnPoints[r].position, Quaternion.identity);
+    }
+
+    // QUESTIONS
+    void ShowQuestion()
+    {
+        Time.timeScale = 0;
+
+        var q = questionManager.GetRandomQuestion();
+        questionText.text = q.question;
+
+        for (int i = 0; i < answerButtons.Length; i++)
         {
-            questionPanel.SetActive(true);
-            Time.timeScale = 0f; // pauses
+            int buttonIndex = i;
+            answerButtons[i].GetComponentInChildren<Text>().text = q.answers[i];
+
+            answerButtons[i].onClick.RemoveAllListeners();
+
+            if (i == q.correctIndex)
+            {
+                answerButtons[i].onClick.AddListener(() => Correct());
+            }
+            else
+            {
+                answerButtons[i].onClick.AddListener(() => Wrong());
+            }
         }
+
+        questionPanel.SetActive(true);
     }
 
-    //called by buttons on questions
-    public void AnswerQuestion(bool correct)
+    void Correct()
     {
-        if (questionPanel != null)
-            questionPanel.SetActive(false);
-
-        Time.timeScale = 1f;
-
-        if(!correct)
-            EndGame();
+        questionPanel.SetActive(false);
+        Time.timeScale = 1;
     }
 
-    void EndGame()
+    void Wrong()
     {
-        gameOver = true;
-        int highScore = PlayerPrefs.GetInt("HighScore", 0);
-        if(score > highScore)
-            PlayerPrefs.SetInt("HighScore", score);
-
-        Debug.Log("Game Over! Score: " + score + " | High Score: " + PlayerPrefs.GetInt("HighScore"));
-        Time.timeScale = 0f; 
+        Time.timeScale = 1;
+        Debug.Log("You failed. Nice job.");
+        // Here you can add: reset score, reload scene, whatever
     }
 }
