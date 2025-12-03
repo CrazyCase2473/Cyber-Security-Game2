@@ -13,6 +13,7 @@ public class HandController : MonoBehaviour
 
     void Update()
     {
+        Cursor.visible = false;
         Vector3 mousePos = Input.mousePosition;
 
         mousePos.z = 10f;

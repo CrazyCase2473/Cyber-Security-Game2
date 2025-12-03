@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
     // QUESTIONS
     void ShowQuestion()
     {
+        Cursor.visible = true;
         Time.timeScale = 0;
 
         var q = questionManager.GetRandomQuestion();
@@ -92,6 +93,7 @@ public class GameManager : MonoBehaviour
     {
         questionPanel.SetActive(false);
         Time.timeScale = 1;
+        Cursor.visible = false;
     }
 
     void Wrong()
