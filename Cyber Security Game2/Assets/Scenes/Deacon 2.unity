@@ -156,76 +156,6 @@ MonoBehaviour:
     - no
     - no
     correctIndex: 0
-  - question: What is phishing?
-    answers:
-    - A way to hack Wifi
-    - A computer virus
-    - A scam to steal personal info
-    - AntiVirus Software
-    correctIndex: 2
-  - question: Which is the strongest password?
-    answers:
-    - p@SsW0rD
-    - 123456789
-    - password
-    - InG9$fq!
-    correctIndex: 3
-  - question: What should you do with sus emails?
-    answers:
-    - Click the links
-    - Delete it
-    - Reply with your information
-    - Forward to friends
-    correctIndex: 1
-  - question: What does "Malware" mean?
-    answers:
-    - Harmful software
-    - Computer memory
-    - Internet speed
-    - Safe software
-    correctIndex: 0
-  - question: What does a firewall do?
-    answers:
-    - Slow down your internet
-    - Cool the computer down
-    - Blocks unauthorized access
-    - Change your ip adress
-    correctIndex: 2
-  - question: What is two-factor Authentication?
-    answers:
-    - Two passwords
-    - Login and extra verification
-    - Email only log in
-    - Guest access
-    correctIndex: 1
-  - question: What is a data breach?
-    answers:
-    - Unauthorized access to data?
-    - Computer overheating
-    - Lost password
-    - Laptop model
-    correctIndex: 0
-  - question: What is social engineering?
-    answers:
-    - Coding websites
-    - Building networks
-    - Designing code for big companies
-    - Manipulating people into giving info
-    correctIndex: 3
-  - question: What is an IP address
-    answers:
-    - Email address
-    - Device identifier
-    - Router name
-    - Vpn your using
-    correctIndex: 1
-  - question: What is a keylogger
-    answers:
-    - A virus that records what you type
-    - Matthew
-    - A password generator
-    - The person in court that writes notes
-    correctIndex: 0
 --- !u!4 &167602590
 Transform:
   m_ObjectHideFlags: 0
@@ -300,8 +230,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1127,7 +1057,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 0.6075471, g: 0.6075471, b: 0.6075471, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
