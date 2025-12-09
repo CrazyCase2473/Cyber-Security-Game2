@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BeauBockus_0: -1260575187042531549
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

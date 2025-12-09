@@ -156,6 +156,76 @@ MonoBehaviour:
     - no
     - no
     correctIndex: 0
+  - question: What is phishing?
+    answers:
+    - A way to hack Wifi
+    - A computer virus
+    - A scam to steal personal info
+    - AntiVirus Software
+    correctIndex: 2
+  - question: Which is the strongest password?
+    answers:
+    - p@SsW0rD
+    - 123456789
+    - password
+    - InG9$fq!
+    correctIndex: 3
+  - question: What should you do with sus emails?
+    answers:
+    - Click the links
+    - Delete it
+    - Reply with your information
+    - Forward to friends
+    correctIndex: 1
+  - question: What does "Malware" mean?
+    answers:
+    - Harmful software
+    - Computer memory
+    - Internet speed
+    - Safe software
+    correctIndex: 0
+  - question: What does a firewall do?
+    answers:
+    - Slow down your internet
+    - Cool the computer down
+    - Blocks unauthorized access
+    - Change your ip adress
+    correctIndex: 2
+  - question: What is two-factor Authentication?
+    answers:
+    - Two passwords
+    - Login and extra verification
+    - Email only log in
+    - Guest access
+    correctIndex: 1
+  - question: What is a data breach?
+    answers:
+    - Unauthorized access to data?
+    - Computer overheating
+    - Lost password
+    - Laptop model
+    correctIndex: 0
+  - question: What is social engineering?
+    answers:
+    - Coding websites
+    - Building networks
+    - Designing code for big companies
+    - Manipulating people into giving info
+    correctIndex: 3
+  - question: What is an IP address
+    answers:
+    - Email address
+    - Device identifier
+    - Router name
+    - Vpn your using
+    correctIndex: 1
+  - question: What is a keylogger
+    answers:
+    - A virus that records what you type
+    - Matthew
+    - A password generator
+    - The person in court that writes notes
+    correctIndex: 0
 --- !u!4 &167602590
 Transform:
   m_ObjectHideFlags: 0
@@ -412,7 +482,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 5
   m_Depth: 0
   m_CullingMask:
