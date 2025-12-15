@@ -1,9 +1,10 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Bug : MonoBehaviour
 {
     public float speed = 3f;
     public float moveRadius = 5f;
+
     private Vector3 targetPosition;
 
     void Start()
@@ -13,7 +14,11 @@ public class Bug : MonoBehaviour
 
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(
+            transform.position,
+            targetPosition,
+            speed * Time.deltaTime
+        );
 
         if ((transform.position - targetPosition).sqrMagnitude < 0.01f)
         {
@@ -33,7 +38,6 @@ public class Bug : MonoBehaviour
             newTarget = new Vector3(randomX, randomY, transform.position.z);
             attempts++;
         }
-        // Check that no other bug is too close to this target
         while (Physics2D.OverlapCircle(newTarget, 0.5f) != null && attempts < 10);
 
         targetPosition = newTarget;
@@ -44,6 +48,7 @@ public class Bug : MonoBehaviour
         if (other.CompareTag("Hand"))
         {
             GameManager.Instance.AddScore(1);
+            GameManager.Instance.PlayBugSquash();
             Destroy(gameObject);
         }
     }
