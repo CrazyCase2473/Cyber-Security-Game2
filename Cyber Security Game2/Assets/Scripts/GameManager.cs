@@ -1,38 +1,69 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    [Header("Bug Settings")]
     public GameObject bugPrefab;
     public Transform[] spawnPoints;
+    public int maxBugs = 10;
+    public float baseSpawnRate = 1.5f;
 
+    [Header("Score")]
     public int score = 0;
-    public TMPro.TMP_Text scoreText;
+    public TMP_Text scoreText;
 
-
+    [Header("Questions")]
     public QuestionManager questionManager;
-
-    // UI
     public GameObject questionPanel;
-    public TMPro.TMP_Text questionText;
+    public TMP_Text questionText;
     public Button[] answerButtons;
+    public TMP_Text levelText;
+    public TMP_Text bugCountText;
+    private int stepsUntilQuestion = 3;
+    public int totalLevels = 10;
+    [Header("Level Timing")]
+    public float baseTimePerLevel = 12f;   // first level
+    public float timeIncreasePerLevel = 5f; // added each level
 
-    int stepsUntilQuestion = 3;
+
+    [Header("Difficulty")]
+    public int difficultyLevel = 1;
+    private float difficultyTimer = 0f;
 
     void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
     }
 
     void Start()
     {
         UpdateScoreUI();
-        InvokeRepeating("SpawnBug", 0, 1.5f);
         questionPanel.SetActive(false);
+
+        InvokeRepeating("SpawnBug", 0f, baseSpawnRate);
     }
+
+    void Update()
+    {
+        difficultyTimer += Time.deltaTime;
+
+    if (difficultyTimer >= GetTimeForCurrentLevel())
+    {
+        difficultyTimer = 0f;
+        IncreaseDifficulty();
+    }
+
+        UpdateInfoUI();
+    }
+
 
     public void AddScore(int amount)
     {
@@ -40,9 +71,10 @@ public class GameManager : MonoBehaviour
         UpdateScoreUI();
 
         stepsUntilQuestion--;
+
         if (stepsUntilQuestion <= 0)
         {
-            stepsUntilQuestion = 3;
+            stepsUntilQuestion = Mathf.Max(1, 3 - difficultyLevel);
             ShowQuestion();
         }
     }
@@ -54,36 +86,37 @@ public class GameManager : MonoBehaviour
 
     void SpawnBug()
     {
+        int currentBugs = GameObject.FindGameObjectsWithTag("Bug").Length;
+
+        if (currentBugs >= maxBugs)
+        {
+            LoseGame();
+            return;
+        }
+
         if (spawnPoints.Length == 0) return;
-        int r = Random.Range(0, spawnPoints.Length);
-        Instantiate(bugPrefab, spawnPoints[r].position, Quaternion.identity);
+
+        Transform spawn = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        Instantiate(bugPrefab, spawn.position, Quaternion.identity);
     }
 
-    // QUESTIONS
     void ShowQuestion()
     {
-        Cursor.visible = true;
         Time.timeScale = 0;
+        Cursor.visible = true;
 
         var q = questionManager.GetRandomQuestion();
         questionText.text = q.question;
 
         for (int i = 0; i < answerButtons.Length; i++)
         {
-            int buttonIndex = i;
+            answerButtons[i].onClick.RemoveAllListeners();
             answerButtons[i].GetComponentInChildren<TMP_Text>().text = q.answers[i];
 
-
-            answerButtons[i].onClick.RemoveAllListeners();
-
             if (i == q.correctIndex)
-            {
-                answerButtons[i].onClick.AddListener(() => Correct());
-            }
+                answerButtons[i].onClick.AddListener(Correct);
             else
-            {
-                answerButtons[i].onClick.AddListener(() => Wrong());
-            }
+                answerButtons[i].onClick.AddListener(Wrong);
         }
 
         questionPanel.SetActive(true);
@@ -99,7 +132,41 @@ public class GameManager : MonoBehaviour
     void Wrong()
     {
         Time.timeScale = 1;
-        Debug.Log("You failed. Nice job.");
-        // Here you can add: reset score, reload scene, whatever
+        LoseGame();
     }
+
+    void IncreaseDifficulty()
+    {
+        if (difficultyLevel >= totalLevels)
+            return;
+
+        difficultyLevel++;
+
+        CancelInvoke("SpawnBug");
+        float newRate = Mathf.Max(0.4f, baseSpawnRate - difficultyLevel * 0.15f);
+        InvokeRepeating("SpawnBug", 0f, newRate);
+
+        maxBugs = Mathf.Max(4, maxBugs - 1);
+
+        Debug.Log("Difficulty increased to " + difficultyLevel);
+    }
+
+    void LoseGame()
+    {
+        Time.timeScale = 1;
+        Cursor.visible = true;
+        SceneManager.LoadScene("End Menu");
+    }
+    void UpdateInfoUI()
+    {
+        levelText.text = "Level: " + difficultyLevel + " / " + totalLevels;
+
+        int currentBugs = GameObject.FindGameObjectsWithTag("Bug").Length;
+        bugCountText.text = "Bugs: " + currentBugs + " / " + maxBugs;
+    }
+    float GetTimeForCurrentLevel()
+    {
+        return baseTimePerLevel + (difficultyLevel - 1) * timeIncreasePerLevel;
+    }
+
 }
