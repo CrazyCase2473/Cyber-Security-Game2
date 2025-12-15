@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7342285582362908036}
   m_Layer: 0
   m_Name: Bug
-  m_TagString: Untagged
+  m_TagString: Bug
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,6 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+  moveRadius: 5
 --- !u!58 &7342285582362908036
 CircleCollider2D:
   m_ObjectHideFlags: 0
