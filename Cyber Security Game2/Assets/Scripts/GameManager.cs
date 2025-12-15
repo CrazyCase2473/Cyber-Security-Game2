@@ -22,11 +22,17 @@ public class GameManager : MonoBehaviour
     public GameObject questionPanel;
     public TMP_Text questionText;
     public Button[] answerButtons;
+    public TMP_Text levelText;
+    public TMP_Text bugCountText;
     private int stepsUntilQuestion = 3;
+    public int totalLevels = 10;
+    [Header("Level Timing")]
+    public float baseTimePerLevel = 12f;   // first level
+    public float timeIncreasePerLevel = 5f; // added each level
+
 
     [Header("Difficulty")]
     public int difficultyLevel = 1;
-    public float timePerLevel = 30f;
     private float difficultyTimer = 0f;
 
     void Awake()
@@ -49,11 +55,13 @@ public class GameManager : MonoBehaviour
     {
         difficultyTimer += Time.deltaTime;
 
-        if (difficultyTimer >= timePerLevel)
-        {
-            difficultyTimer = 0f;
-            IncreaseDifficulty();
-        }
+    if (difficultyTimer >= GetTimeForCurrentLevel())
+    {
+        difficultyTimer = 0f;
+        IncreaseDifficulty();
+    }
+
+        UpdateInfoUI();
     }
 
 
@@ -129,14 +137,15 @@ public class GameManager : MonoBehaviour
 
     void IncreaseDifficulty()
     {
+        if (difficultyLevel >= totalLevels)
+            return;
+
         difficultyLevel++;
 
-        // Faster bug spawns
         CancelInvoke("SpawnBug");
         float newRate = Mathf.Max(0.4f, baseSpawnRate - difficultyLevel * 0.15f);
         InvokeRepeating("SpawnBug", 0f, newRate);
 
-        // Fewer allowed bugs
         maxBugs = Mathf.Max(4, maxBugs - 1);
 
         Debug.Log("Difficulty increased to " + difficultyLevel);
@@ -148,4 +157,16 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true;
         SceneManager.LoadScene("End Menu");
     }
+    void UpdateInfoUI()
+    {
+        levelText.text = "Level: " + difficultyLevel + " / " + totalLevels;
+
+        int currentBugs = GameObject.FindGameObjectsWithTag("Bug").Length;
+        bugCountText.text = "Bugs: " + currentBugs + " / " + maxBugs;
+    }
+    float GetTimeForCurrentLevel()
+    {
+        return baseTimePerLevel + (difficultyLevel - 1) * timeIncreasePerLevel;
+    }
+
 }
