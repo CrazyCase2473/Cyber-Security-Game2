@@ -149,13 +149,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questions:
-  - question: test
-    answers:
-    - yes
-    - no
-    - no
-    - no
-    correctIndex: 0
   - question: What is phishing?
     answers:
     - A way to hack Wifi
