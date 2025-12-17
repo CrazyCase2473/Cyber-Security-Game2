@@ -12,7 +12,11 @@ public class GameManager : MonoBehaviour
     public Transform[] spawnPoints;
     public int maxBugs = 5;
     public float baseSpawnRate = 1.5f;
+<<<<<<< Updated upstream
     public float bugSpeedIncrease = 0.2f;
+=======
+    public float bugSpeedIncrease = 0.1f;
+>>>>>>> Stashed changes
 
     [Header("Score")]
     public int score = 0;
@@ -29,7 +33,11 @@ public class GameManager : MonoBehaviour
 
     [Header("Level Timing")]
     public float baseTimePerLevel = 12f;
+<<<<<<< Updated upstream
     public float timeIncreasePerLevel = 0.2f;
+=======
+    public float timeIncreasePerLevel = 0.5f;
+>>>>>>> Stashed changes
 
     [Header("Difficulty")]
     public int difficultyLevel = 1;
@@ -54,14 +62,22 @@ public class GameManager : MonoBehaviour
     {
         UpdateScoreUI();
         questionPanel.SetActive(false);
+<<<<<<< Updated upstream
         InvokeRepeating(nameof(SpawnBug), 0f, baseSpawnRate);
+=======
+        InvokeRepeating("SpawnBug", 0f, baseSpawnRate);
+>>>>>>> Stashed changes
     }
 
     void Update()
     {
         difficultyTimer += Time.deltaTime;
 
+<<<<<<< Updated upstream
         if (difficultyTimer >= baseTimePerLevel)
+=======
+        if (difficultyTimer >= GetTimeForCurrentLevel())
+>>>>>>> Stashed changes
         {
             difficultyTimer = 0f;
             IncreaseDifficulty();
@@ -102,6 +118,7 @@ public class GameManager : MonoBehaviour
         }
 
         Transform spawn = spawnPoints[Random.Range(0, spawnPoints.Length)];
+<<<<<<< Updated upstream
         if (spawn == null) return;
 
         GameObject bug = Instantiate(bugPrefab, spawn.position, Quaternion.identity);
@@ -115,6 +132,17 @@ public class GameManager : MonoBehaviour
     {
         if (sfxSource != null && bugSquashClip != null)
             sfxSource.PlayOneShot(bugSquashClip);
+=======
+        if (spawn != null)
+        {
+            GameObject bug = Instantiate(bugPrefab, spawn.position, Quaternion.identity);
+
+            // Scale bug speed gradually
+            Bug bugScript = bug.GetComponent<Bug>();
+            if (bugScript != null)
+                bugScript.speed += (difficultyLevel - 1) * bugSpeedIncrease;
+        }
+>>>>>>> Stashed changes
     }
 
     void ShowQuestion()
@@ -163,13 +191,37 @@ public class GameManager : MonoBehaviour
     {
         difficultyLevel++;
 
+<<<<<<< Updated upstream
         CancelInvoke(nameof(SpawnBug));
         float newRate = Mathf.Max(0.2f, baseSpawnRate * Mathf.Pow(0.95f, difficultyLevel));
         InvokeRepeating(nameof(SpawnBug), 0f, newRate);
 
         maxBugs = Mathf.FloorToInt(5 * Mathf.Pow(1.1f, difficultyLevel));
         baseTimePerLevel += timeIncreasePerLevel;
+=======
+        // Spawn bugs faster exponentially, but never below 0.2s
+        CancelInvoke("SpawnBug");
+        float newRate = Mathf.Max(0.2f, baseSpawnRate * Mathf.Pow(0.95f, difficultyLevel));
+        InvokeRepeating("SpawnBug", 0f, newRate);
+
+        // Max bugs grows exponentially
+        maxBugs = Mathf.FloorToInt(5 * Mathf.Pow(1.1f, difficultyLevel));
+
+        // Increase bug speed more aggressively
+        foreach (var bugObj in GameObject.FindGameObjectsWithTag("Bug"))
+        {
+            Bug bugScript = bugObj.GetComponent<Bug>();
+            if (bugScript != null)
+                bugScript.speed += 0.2f; // faster scaling
+        }
+
+        // Optional: slightly increase level time so first few levels feel manageable
+        baseTimePerLevel += 0.2f;
+
+        Debug.Log("Difficulty increased to " + difficultyLevel);
+>>>>>>> Stashed changes
     }
+
 
     void LoseGame()
     {
@@ -178,6 +230,7 @@ public class GameManager : MonoBehaviour
 
         PlayerPrefs.SetInt("FinalScore", score);
 
+<<<<<<< Updated upstream
         if (sfxSource != null && gameOverClip != null)
             sfxSource.PlayOneShot(gameOverClip);
 
@@ -186,6 +239,8 @@ public class GameManager : MonoBehaviour
 
     void LoadEndMenu()
     {
+=======
+>>>>>>> Stashed changes
         SceneManager.LoadScene("End Menu");
     }
 
@@ -196,4 +251,12 @@ public class GameManager : MonoBehaviour
         int currentBugs = GameObject.FindGameObjectsWithTag("Bug").Length;
         bugCountText.text = "Bugs: " + currentBugs + " / " + maxBugs;
     }
+<<<<<<< Updated upstream
+=======
+
+    float GetTimeForCurrentLevel()
+    {
+        return baseTimePerLevel;
+    }
+>>>>>>> Stashed changes
 }
