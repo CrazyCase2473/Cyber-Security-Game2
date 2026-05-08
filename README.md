@@ -17,5 +17,5 @@ This project highlights a pivot toward a more focused UI-centric design. By leve
 * C# Scripting
 * Unity UI System
 
-Play for Free:
-https://sambdev096.itch.io/bug-bash-buster
+Play for Free Here:
+[https://sambdev096.itch.io/bug-bash-buster](https://sambdev096.itch.io/bug-bash-binary)
