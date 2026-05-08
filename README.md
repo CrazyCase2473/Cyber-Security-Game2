@@ -16,3 +16,6 @@ This project highlights a pivot toward a more focused UI-centric design. By leve
 * Unity 2022+
 * C# Scripting
 * Unity UI System
+
+Play for Free:
+https://sambdev096.itch.io/bug-bash-buster
